@@ -68,22 +68,22 @@
     //Put port connected to the actual task to be executed
     uvm_blocking_put_port#(uvm_object) port_execute;
     
-    //List of pending processs
+    //List of pending threads
     local uvm_thread_decoupler_info pending_threads[$];
     
-    //List of executing processs
+    //List of executing threads
     local uvm_thread_decoupler_info executing_threads[$];
     
-    //Event emitted when a process is started
+    //Event emitted when a thread is started
     local event thread_started;
     
-    //Event emitted when a process is ended
+    //Event emitted when a thread is ended
     local event thread_ended;
     
     //Main process
     local process process_main;
     
-    //Processes associated with execute_with_id
+    //Processes associated with execute_with_id()
     //The key is the thread ID
     local process processes_execute_with_id[int unsigned];
     
@@ -95,7 +95,7 @@
       port_execute = new("port_execute", this);
     endfunction
     
-    //Determine if a process ID is in a process info list
+    //Determine if a process ID is in a thread info list
     protected virtual function bit is_thread_id_in_list(int unsigned thread_id, ref uvm_thread_decoupler_info l[$]);
       bit found_it = 0;
           
